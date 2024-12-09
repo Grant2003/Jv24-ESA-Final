@@ -1,0 +1,45 @@
+<!--
+//-----------------------------------
+  //   Fichier : 
+  //   Par:      Alain Martel
+  //   Date :    2024-10-09
+  //   modifié par : Anthony Grenier
+  //-----------------------------------
+-->
+<div class='container'>
+  <section class="entete row">
+    <h1>
+    <img width=50px src="images/jourvie.png" alt="non dispo">
+    {{titre}}</h1> <br>
+    <h1 *ngIf="visible">Par Anthony Grenier</h1>
+  </section>
+
+  <app-connexion #conn
+  (ConnexionReussieInactif) = lt.onConnexion($event)
+  (ConnexionReussieActif) = jour.onConnexion($event)
+  (ConnexionReussieInactif) = onConnexion($event)
+  (ConnexionReussieActif) = onConnexion($event)
+  (ConnexionAdmin) = admin.onConnexion()>
+  </app-connexion>
+
+  <app-liste-taches #lt
+      (quitterLT) = onQuitterLT();
+      (quitterLT) = conn.onQuitter()
+      (demarrerSesTrav) = jour.onDemarrerSessTrav($event)>
+  </app-liste-taches>
+
+  <app-journal #jour
+     (changerTache) = lt.onchangerTache($event)
+     (quitterJournal) = conn.onQuitter()>
+  </app-journal>
+
+  <app-admin #admin>
+
+  </app-admin>
+
+
+
+</div>
+
+
+

@@ -1,0 +1,93 @@
+<!--
+//-----------------------------------
+//   Fichier : admin.component.html
+//   Par:      Anthony Grenier
+//   Date :    2024-11-20
+//-----------------------------------
+-->
+
+<section *ngIf="visible">
+    <button *ngIf="!sessionEnCoursVisible" (click)="activerSessionEnCours()">Sessions en cours</button>
+    <button *ngIf="!sommaireDevVisible" (click)="activerSommaireDev()">Sommaire Développeurs</button>
+    <section *ngIf="sessionEnCoursVisible">
+        <article>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Dev Id</th>
+                    <th>Sess Id</th>
+                    <th>Début</th>
+                    <th>Minutes</th>
+                    <th>Heures</th>
+                    <th>Tache Id</th>
+                    <th>Nb Commentaires</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let session of tabSessionsEnCours">
+                    <td>{{session.idDev}}</td>
+                    <td>{{session.id}}</td>
+                    <td>{{session.debut}}</td>
+                    <td>{{obtenirTempsEnUnite(1,session.id)}}</td>
+                    <td>{{obtenirTempsEnUnite(60,session.id)}}</td>
+                    <td>{{session.idTache}}</td>
+                    <td>{{obtenirNbCommentaireSess(session.id)}}</td>
+                  </tr>
+                </tbody>
+              </table>
+         </article>
+    </section>
+    <section *ngIf="sommaireDevVisible">
+        <article>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Mat + Nom</th>
+                    <th>Projet(Id)</th>
+                    <th>Nb Sess Trav</th>
+                    <th>Heures</th>
+                    <th>Nb Comm</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dev of tabDev">
+                    <td (click)="activerDetailDev(dev.id)">{{dev.matricule + " + " +dev.prenom + " " +  dev.nom}}</td>
+                    <td>{{trouverNomProjet(dev.idProjet)}} ({{dev.idProjet }})</td>
+                    <td>{{dev.nbSessTrav}}</td>
+                    <td>{{dev.nbHeures}}</td>
+                    <td>{{dev.nbComm}}</td>
+                  </tr>
+                </tbody>
+              </table>
+         </article>
+    </section>
+    <section *ngIf="detailDevVisible">
+        <article>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Id sess</th>
+                    <th>Debut</th>
+                    <th>Fin</th>
+                    <th>Minutes</th>
+                    <th>Heures</th>
+                    <th>Tache</th>
+                    <th>Nb Comm</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let session of tabSessTravPourUnDev">
+                    <td>{{session.id}}</td>
+                    <td>{{session.debut }}</td>
+                    <td>{{session.fin}}</td>
+                    <td>{{obtenirTempsEnUnite(1,session.id)}}</td>
+                    <td>{{obtenirTempsEnUnite(60,session.id)}}</td>
+                    <td>{{session.idTache}}</td>
+                    <td>{{obtenirNbCommentaireSess(session.id)}}</td>
+                  </tr>
+                </tbody>
+              </table>
+         </article>
+    </section>
+</section>
+

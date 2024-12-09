@@ -1,0 +1,19 @@
+.entete{
+    background-color: black;
+    color:aqua;
+    border-width: 7px;
+    border-style: solid;
+    border-color: gold;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.actif{
+    color:bisque;
+    background-color: green;
+}
+
+.inactif{
+    color:gold;
+    background-color: red;
+}

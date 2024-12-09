@@ -1,0 +1,17 @@
+<!--
+//-----------------------------------
+  //   Fichier : conmexion.html
+  //   Par:      Alain Martel
+  //   Date :    2024-10-09
+  //-----------------------------------
+-->
+
+<section *ngIf="visible">
+   <h3>Connectez vous:</h3>
+   <label>Matricule:</label>
+   <input name="chm_matricule" [(ngModel)]="matricule"><br>
+   <label>Mot de passe:</label>
+   <input name="chm_motDePasse" [(ngModel)]="motDePasse"><br>
+   <button class="btn btn-success" (click)="validerConnexion()">Connexion</button>
+
+</section>

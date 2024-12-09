@@ -37,7 +37,7 @@ export class JournalComponent {
   tempActif=0;
   delai=2000;
   commCourant:Commentaire = new Commentaire();
-  timerDebutSessTrav = new Date().getTime();
+  timerDebutSessTrav = 0;
   tabSessTrav: SessionTravail[] = new Array();
   sessTravCourante:SessionTravail = new SessionTravail();
   tabCommentaires:Commentaire[] = new Array();
@@ -50,6 +50,7 @@ export class JournalComponent {
   //------------------------------------------------
   constructor(private jvSrv:JvService)
   {
+
   }
   //------------------------------------------------
   //
@@ -63,15 +64,19 @@ export class JournalComponent {
   //------------------------------------------------
   //
   //------------------------------------------------
-  commencerTimer(){
-    this.timerDebutSessTrav = new Date().getTime();
-    this.getTempsPasse();
-  }
-  //------------------------------------------------
-  //
-  //------------------------------------------------
   getTempsPasse() {
-    let secondesTotal = Math.floor((new Date().getTime() - this.timerDebutSessTrav)/100)/10;
+    let secondesTotal =0;
+    if(this.tabSessTrav.length != 0)
+    {
+      if(this.dev.etat=="inactif")
+      {
+        secondesTotal = (Date.now() - Date.parse(this.tabSessTrav[this.tabSessTrav.length - 1].fin)) / 1000
+      }
+      else
+      {
+        secondesTotal = (Date.now() - Date.parse(this.tabSessTrav[this.tabSessTrav.length - 1].debut)) / 1000
+      }
+    }
     this.tempActif = secondesTotal;
 
     if(secondesTotal >= 180 && secondesTotal < 10800){
@@ -95,9 +100,9 @@ export class JournalComponent {
     this.btnArreterVisible = true;
     this.dev = dev;
     this.rafraichirJournal();
-    this.timerDebutSessTrav = new Date().getTime();
     //this.commencerTimer();
   }
+
   //------------------------------------------------
   //
   //------------------------------------------------
@@ -108,7 +113,6 @@ export class JournalComponent {
     this.btnCommentaireVisible = true;
     this.dev = mesInfos.dev;
     this.visible=true;
-    this.commencerTimer();
     this.jvSrv.postSessionTravail(mesInfos.dev.id, mesInfos.idTache).subscribe(
        {
          next:
@@ -150,7 +154,6 @@ export class JournalComponent {
     this.btnArreterVisible = false;
     this.btnCommentaireVisible = false;
     this.dev.etat='inactif';
-    this.commencerTimer();
     let idSessTrav = this.tabSessTrav[this.tabSessTrav.length - 1].id;
     this.jvSrv.putSessionTravail(idSessTrav).subscribe(
       {

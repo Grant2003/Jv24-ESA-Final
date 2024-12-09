@@ -88,6 +88,10 @@ export class JournalComponent {
       this.unite = "heures";
       this.tempActif = secondesTotal/10800;
     }
+    else
+    {
+      this.unite="secondes";
+    }
 
     this.tempActif = Math.round(this.tempActif*10)/10;
   }

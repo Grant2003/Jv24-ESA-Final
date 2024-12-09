@@ -30,5 +30,5 @@
   //------------------------------------------------
   //
   //------------------------------------------------
-  export const urlSrv = "https://e2071623.techinfo-cstj.ca/jv24-srv/";
+  export const urlSrv = "https://2071623.techinfo-cstj.ca/jv24-srv/";
   //export const urlSrv = "https://amartel.techinfo-cstj.ca/jv24-srv/";
